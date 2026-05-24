@@ -1,0 +1,19 @@
+<div style="max-width:900px;margin:0 auto;padding:40px 20px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start">
+  <div>
+    {% if product.featured_image %}
+      {{ product.featured_image | image_url: width: 600 | image_tag: style: 'width:100%;border-radius:16px' }}
+    {% endif %}
+  </div>
+  <div>
+    <h1 style="font-size:28px;font-weight:900;margin-bottom:12px">{{ product.title }}</h1>
+    <div style="font-size:28px;font-weight:900;margin-bottom:20px;color:#FF3D8B">{{ product.price | money }}</div>
+    <div style="color:#A0A0B0;margin-bottom:28px;line-height:1.7">{{ product.description }}</div>
+    {% form 'product', product %}
+      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+      <button type="submit" name="add" style="width:100%;background:linear-gradient(135deg,#FF3D8B,#FF6B35);color:#fff;border:none;padding:18px;border-radius:50px;font-size:17px;font-weight:800;cursor:pointer"
+        {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}>
+        {% if product.selected_or_first_available_variant.available %}Add to Cart{% else %}Sold Out{% endif %}
+      </button>
+    {% endform %}
+  </div>
+</div>
