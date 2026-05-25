@@ -98,7 +98,12 @@
     /* PRODUCT FRAME */
     .hero-img{display:flex;justify-content:center}
     .pframe{width:100%;max-width:420px;background:linear-gradient(145deg,#180A2E,#0F0F1C,#180A2E);border:1px solid rgba(123,47,190,.3);border-radius:28px;padding:44px 36px;text-align:center;position:relative;overflow:hidden}
-    @media(max-width:768px){.pframe{max-width:100%;padding:32px 20px;border-radius:20px}}
+    @media(max-width:768px){
+      .pframe{max-width:100%;padding:0;border-radius:20px;background:none;border:none;overflow:visible}
+      .pframe::before{display:none}
+      .ftag{display:none}
+      .pcaption{padding:12px 4px 0;font-size:13px}
+    }
     .pframe::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 20%,rgba(255,45,120,.14) 0%,transparent 55%);pointer-events:none}
     .pbottle{width:190px;height:270px;margin:0 auto 20px;background:var(--grad);border-radius:95px 95px 50px 50px;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 24px 70px rgba(255,45,120,.45),0 0 0 1px rgba(255,255,255,.08);position:relative}
     @media(max-width:768px){.pbottle{width:160px;height:230px}}
@@ -107,8 +112,8 @@
     .pb-name{font-size:9px;font-weight:800;letter-spacing:2.5px;color:rgba(255,255,255,.8);text-transform:uppercase;position:relative;z-index:1}
     .pb-dose{font-size:28px;font-weight:900;color:#fff;position:relative;z-index:1}
     .pb-sub{font-size:11px;font-weight:700;color:rgba(255,255,255,.7);position:relative;z-index:1}
-    .pframe img{width:100%;max-width:320px;margin:0 auto 16px;border-radius:12px;position:relative}
-    @media(max-width:768px){.pframe img{max-width:100%}}
+    .pframe img{width:100%;max-width:320px;margin:0 auto 16px;border-radius:12px;position:relative;z-index:1}
+    @media(max-width:768px){.pframe img{max-width:100%;margin:0;border-radius:20px;display:block}}
     .ftag{position:absolute;background:var(--grad);color:#fff;font-size:11px;font-weight:800;padding:7px 14px;border-radius:var(--pill);box-shadow:0 4px 20px rgba(255,45,120,.4);white-space:nowrap}
     .ftl{top:22px;left:-8px}
     .fbr{bottom:28px;right:-8px}
@@ -463,9 +468,9 @@
           <div class="ftag ftl">🌱 100% Vegan</div>
           <div class="ftag fbr">💪 5,000mg</div>
           <div class="mini-bs">
-            <div class="mib">🍓 Strawberry</div>
-            <div class="mib">🔬 Pure Monohydrate</div>
-            <div class="mib">✅ No Fillers</div>
+            <div class="mib">Strawberry Flavour</div>
+            <div class="mib">Pure Monohydrate</div>
+            <div class="mib">No Fillers</div>
           </div>
         </div>
       </div>
@@ -477,12 +482,12 @@
 <div class="tbar">
   <div class="wrap">
     <div class="tscroll">
-      <div class="tp"><div class="tpi">🌱</div>100% Vegan</div>
-      <div class="tp"><div class="tpi">💪</div>5,000mg Per Serving</div>
-      <div class="tp"><div class="tpi">🍓</div>No Chalky Powder</div>
-      <div class="tp"><div class="tpi">🛡️</div>30-Day Guarantee</div>
-      <div class="tp"><div class="tpi">🚚</div>Free Shipping $50+</div>
-      <div class="tp"><div class="tpi">🔬</div>Clinically Dosed</div>
+      <div class="tp"><div class="tpi">✓</div>100% Vegan</div>
+      <div class="tp"><div class="tpi">✓</div>5,000mg Per Serving</div>
+      <div class="tp"><div class="tpi">✓</div>No Chalky Powder</div>
+      <div class="tp"><div class="tpi">✓</div>30-Day Guarantee</div>
+      <div class="tp"><div class="tpi">✓</div>Free Shipping $50+</div>
+      <div class="tp"><div class="tpi">✓</div>Clinically Dosed</div>
     </div>
   </div>
 </div>
