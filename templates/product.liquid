@@ -313,9 +313,60 @@
     .fi{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease}
     .fi.on{opacity:1;transform:translateY(0)}
     .d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
+
+    /* CART DRAWER */
+    .cart-ov{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:900;opacity:0;pointer-events:none;transition:opacity .3s}
+    .cart-ov.on{opacity:1;pointer-events:all}
+    .cdrawer{position:fixed;top:0;right:0;bottom:0;width:min(420px,100vw);background:#0F0F1C;z-index:901;transform:translateX(100%);transition:transform .35s cubic-bezier(.25,.46,.45,.94);display:flex;flex-direction:column;border-left:1px solid var(--border)}
+    .cdrawer.on{transform:translateX(0)}
+    .cdh{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+    .cd-title{font-size:17px;font-weight:800}
+    .cd-close{background:none;border:none;color:var(--gray);cursor:pointer;font-size:22px;padding:4px 8px;border-radius:8px;transition:color .2s;line-height:1}
+    .cd-close:hover{color:var(--white)}
+    .cd-body{flex:1;overflow-y:auto;padding:16px 24px}
+    .cd-item{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--border)}
+    .cd-img{width:66px;height:66px;border-radius:10px;object-fit:cover;flex-shrink:0;background:rgba(255,255,255,.05)}
+    .cd-info{flex:1}
+    .cd-name{font-size:14px;font-weight:700;margin-bottom:3px}
+    .cd-qty{font-size:13px;color:var(--gray)}
+    .cd-price{font-size:14px;font-weight:800;color:var(--pink);margin-top:4px}
+    .cd-foot{padding:18px 24px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:11px}
+    .cd-total-row{font-size:18px;font-weight:800;display:flex;justify-content:space-between}
+    .cd-checkout{display:block;background:var(--grad);color:#fff;text-align:center;padding:16px;border-radius:var(--pill);text-decoration:none;font-weight:800;font-size:16px;animation:pulse 2.8s ease-in-out infinite}
+    .cd-keep{background:none;border:1px solid var(--border2);color:var(--gray);padding:12px;border-radius:var(--pill);cursor:pointer;font-size:14px;font-weight:600;transition:all .2s}
+    .cd-keep:hover{border-color:rgba(255,255,255,.25);color:var(--white)}
+    .cd-empty-msg{text-align:center;padding:56px 0;color:var(--gray)}
+    .cd-success{background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.2);border-radius:14px;padding:18px;text-align:center;margin-bottom:14px}
+    .cd-success p{color:var(--green);font-weight:700;font-size:15px;margin-top:6px}
+
+    /* VIDEO TESTIMONIALS */
+    .vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
+    @media(max-width:900px){.vgrid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:560px){.vgrid{grid-template-columns:1fr;max-width:380px;margin-left:auto;margin-right:auto}}
+    .vcard{background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden;transition:border-color .3s,transform .3s}
+    .vcard:hover{border-color:rgba(255,45,120,.3);transform:translateY(-3px)}
+    .vframe{position:relative;padding-bottom:177.78%;height:0;overflow:hidden;background:rgba(255,255,255,.03)}
+    .vframe iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none}
+    .vcap{padding:14px 18px 18px;font-size:13px;font-weight:600;color:var(--gray);line-height:1.5}
+
   </style>
 </head>
 <body>
+
+<!-- CART DRAWER -->
+<div class="cart-ov" id="cartOv" onclick="closeCart()"></div>
+<div class="cdrawer" id="cartDrawer">
+  <div class="cdh">
+    <span class="cd-title">🛒 Your Cart</span>
+    <button class="cd-close" onclick="closeCart()" aria-label="Close">✕</button>
+  </div>
+  <div class="cd-body" id="cdBody"></div>
+  <div class="cd-foot" id="cdFoot" style="display:none">
+    <div class="cd-total-row"><span>Total</span><span id="cdTotal"></span></div>
+    <a href="/checkout" class="cd-checkout">Proceed to Checkout →</a>
+    <button class="cd-keep" onclick="closeCart()">Continue Shopping</button>
+  </div>
+</div>
 
 <!-- ANNOUNCE BAR -->
 <div class="ann">🔥 LIMITED TIME: Free Shipping on Orders $50+ &nbsp;|&nbsp; 30-Day Money-Back Guarantee &nbsp;|&nbsp; 50,000+ Happy Customers</div>
@@ -619,6 +670,38 @@
   </div>
 </section>
 
+<!-- VIDEO TESTIMONIALS -->
+<!-- TO ADD YOUR VIDEOS: open each video in Google Drive → click Share → Copy link
+     The link looks like: https://drive.google.com/file/d/XXXXXXXXXXXXXX/view?usp=sharing
+     Copy the ID between /d/ and /view — then replace DRIVE_FILE_ID_1, DRIVE_FILE_ID_2, DRIVE_FILE_ID_3 below -->
+<section class="sec vtsec fi">
+  <div class="wrap tc">
+    <div class="tag tag-green">Video proof</div>
+    <h2 class="h2">Watch them <span class="grad-text">talk about it.</span></h2>
+    <p class="lead" style="max-width:540px;margin:12px auto 0">Unsponsored. Unscripted. Real customers sharing their real results.</p>
+    <div class="vgrid">
+      <div class="vcard fi d1">
+        <div class="vframe">
+          <iframe src="https://drive.google.com/file/d/DRIVE_FILE_ID_1/preview" allowfullscreen allow="autoplay; encrypted-media" loading="lazy"></iframe>
+        </div>
+        <div class="vcap"><span class="stars" style="font-size:12px">★★★★★</span>&nbsp; "My lifts went up 25lbs — I'm obsessed"</div>
+      </div>
+      <div class="vcard fi d2">
+        <div class="vframe">
+          <iframe src="https://drive.google.com/file/d/DRIVE_FILE_ID_2/preview" allowfullscreen allow="autoplay; encrypted-media" loading="lazy"></iframe>
+        </div>
+        <div class="vcap"><span class="stars" style="font-size:12px">★★★★★</span>&nbsp; "I actually look forward to taking it every day"</div>
+      </div>
+      <div class="vcard fi d3">
+        <div class="vframe">
+          <iframe src="https://drive.google.com/file/d/DRIVE_FILE_ID_3/preview" allowfullscreen allow="autoplay; encrypted-media" loading="lazy"></iframe>
+        </div>
+        <div class="vcap"><span class="stars" style="font-size:12px">★★★★★</span>&nbsp; "Best supplement decision I've ever made"</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- COMPARISON -->
 <section class="sec sec-alt fi">
   <div class="wrap tc">
@@ -849,6 +932,59 @@
   // FADE IN
   const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('on');io.unobserve(x.target);}});},{threshold:0.07,rootMargin:'0px 0px -28px 0px'});
   document.querySelectorAll('.fi').forEach(el=>io.observe(el));
+
+  // AJAX CART
+  function fmtMoney(c){return'$'+(c/100).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
+  function openCart(){
+    document.getElementById('cartOv').classList.add('on');
+    document.getElementById('cartDrawer').classList.add('on');
+    document.body.style.overflow='hidden';
+    refreshCart();
+  }
+  function closeCart(){
+    document.getElementById('cartOv').classList.remove('on');
+    document.getElementById('cartDrawer').classList.remove('on');
+    document.body.style.overflow='';
+  }
+  async function refreshCart(){
+    try{
+      const cart=await(await fetch('/cart.js')).json();
+      const body=document.getElementById('cdBody');
+      const foot=document.getElementById('cdFoot');
+      const tot=document.getElementById('cdTotal');
+      if(cart.item_count===0){
+        body.innerHTML='<div class="cd-empty-msg"><div style="font-size:44px;margin-bottom:14px">🛒</div><p>Your cart is empty</p></div>';
+        foot.style.display='none';
+      }else{
+        body.innerHTML='<div class="cd-success"><div style="font-size:32px">✅</div><p>Added to your cart!</p></div>'+
+          cart.items.map(item=>`<div class="cd-item">${item.image?`<img src="${item.image}" class="cd-img" alt="${item.product_title}">`:'<div class="cd-img"></div>'}<div class="cd-info"><div class="cd-name">${item.product_title}</div><div class="cd-qty">Qty: ${item.quantity}</div><div class="cd-price">${fmtMoney(item.line_price)}</div></div></div>`).join('');
+        tot.textContent=fmtMoney(cart.total_price);
+        foot.style.display='flex';
+      }
+    }catch(e){console.error('Cart error',e);}
+  }
+  document.querySelectorAll('.atc-form,.matc').forEach(form=>{
+    form.addEventListener('submit',async e=>{
+      e.preventDefault();
+      const btn=form.querySelector('button[name="add"]');
+      if(!btn||btn.disabled)return;
+      const orig=btn.innerHTML;
+      btn.disabled=true;
+      btn.innerHTML='Adding…';
+      try{
+        const res=await fetch('/cart/add.js',{method:'POST',body:new FormData(form)});
+        if(res.ok){
+          btn.innerHTML='✓ Added!';
+          openCart();
+          setTimeout(()=>{btn.disabled=false;btn.innerHTML=orig;},2500);
+        }else{
+          const err=await res.json().catch(()=>({}));
+          btn.innerHTML=err.description||'Try again';
+          btn.disabled=false;
+        }
+      }catch(err){btn.innerHTML='Try again';btn.disabled=false;}
+    });
+  });
 </script>
 </body>
 </html>
