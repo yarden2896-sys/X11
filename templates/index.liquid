@@ -211,12 +211,7 @@
           {% if fp and fp.featured_image %}
             {{ fp.featured_image | image_url: width: 600 | image_tag: alt: fp.title, loading: 'eager', style: 'width:100%;border-radius:12px;position:relative;z-index:1' }}
           {% else %}
-            <div class="pbottle">
-              <div class="pb-em">🍓</div>
-              <div class="pb-name">X11 Supplements</div>
-              <div class="pb-dose">5000mg</div>
-              <div class="pb-sub">Creatine Gummies</div>
-            </div>
+            <img src="{{ 'ad-pt-01.png' | asset_url }}" alt="X11 Creatine Gummies" loading="eager" style="width:100%;border-radius:12px;position:relative;z-index:1">
           {% endif %}
           <div class="ptag ptl">🌱 100% Vegan</div>
           <div class="ptag pbr">⚡ 5,000mg Dose</div>
@@ -289,12 +284,7 @@
           {% if fp and fp.featured_image %}
             {{ fp.featured_image | image_url: width: 500 | image_tag: alt: fp.title, loading: 'lazy', style: 'width:100%;border-radius:12px;position:relative;z-index:1' }}
           {% else %}
-            <div class="pfeat-bottle">
-              <div style="font-size:48px;line-height:1;margin-bottom:4px;position:relative;z-index:1">🍓</div>
-              <div style="font-size:8px;font-weight:800;letter-spacing:2px;color:rgba(255,255,255,.8);text-transform:uppercase;position:relative;z-index:1">X11</div>
-              <div style="font-size:24px;font-weight:900;color:#fff;position:relative;z-index:1">5000mg</div>
-              <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,.7);position:relative;z-index:1">Creatine Gummies</div>
-            </div>
+            <img src="{{ 'ad-sq-04.png' | asset_url }}" alt="X11 Creatine Gummies" loading="lazy" style="width:100%;border-radius:12px;position:relative;z-index:1">
           {% endif %}
         </div>
       </div>

@@ -340,14 +340,18 @@
     .cd-success p{color:var(--green);font-weight:700;font-size:15px;margin-top:6px}
 
     /* VIDEO TESTIMONIALS */
-    .vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
-    @media(max-width:900px){.vgrid{grid-template-columns:repeat(2,1fr)}}
-    @media(max-width:560px){.vgrid{grid-template-columns:1fr;max-width:380px;margin-left:auto;margin-right:auto}}
-    .vcard{background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden;transition:border-color .3s,transform .3s}
-    .vcard:hover{border-color:rgba(255,45,120,.3);transform:translateY(-3px)}
-    .vframe{position:relative;padding-bottom:177.78%;height:0;overflow:hidden;background:rgba(255,255,255,.03)}
-    .vframe iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none}
-    .vcap{padding:14px 18px 18px;font-size:13px;font-weight:600;color:var(--gray);line-height:1.5}
+    .vgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:44px}
+    @media(max-width:900px){.vgrid{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:560px){.vgrid{grid-template-columns:repeat(2,1fr)}}
+    .vcard{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:border-color .3s,transform .3s}
+    .vcard:hover{border-color:rgba(255,45,120,.3);transform:translateY(-2px)}
+    .vwrap{position:relative;padding-bottom:177.78%;height:0;overflow:hidden;background:#0a0a14;cursor:pointer}
+    .vwrap video{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover}
+    .vpov{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.28);transition:opacity .25s}
+    .vpov.hidden{opacity:0;pointer-events:none}
+    .vpbtn{width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);border:2px solid rgba(255,255,255,.5);color:#fff;font-size:20px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .2s,background .2s;padding-left:4px}
+    .vpbtn:hover{transform:scale(1.1);background:rgba(255,45,120,.5);border-color:var(--pink)}
+    .vcap{padding:10px 12px 14px;font-size:12px;color:var(--gray);line-height:1.4;text-align:center}
 
   </style>
 </head>
@@ -422,14 +426,9 @@
       <div class="hero-img">
         <div class="pframe">
           {% if product.featured_image %}
-            {{ product.featured_image | image_url: width: 600 | image_tag: alt: product.title, loading: 'eager', style: 'width:100%;max-width:260px;margin:0 auto 16px;border-radius:12px;position:relative' }}
+            {{ product.featured_image | image_url: width: 600 | image_tag: alt: product.title, loading: 'eager', style: 'width:100%;border-radius:12px;position:relative;z-index:1' }}
           {% else %}
-            <div class="pbottle">
-              <span class="pb-em">🍓</span>
-              <span class="pb-name">Creatine Gummies</span>
-              <span class="pb-dose">5,000mg</span>
-              <span class="pb-sub">per serving</span>
-            </div>
+            <img src="{{ 'ad-pt-01.png' | asset_url }}" alt="X11 Creatine Gummies" loading="eager" style="width:100%;border-radius:12px;position:relative;z-index:1">
           {% endif %}
           <p class="pcaption">{{ product.title | default: 'X11 Vegan Creatine Monohydrate Gummies' }}</p>
           <div class="ftag ftl">🌱 100% Vegan</div>
@@ -495,6 +494,17 @@
   </div>
 </section>
 
+<!-- AD GALLERY -->
+<div style="overflow:hidden;padding:0 0 8px;background:var(--card2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div style="display:flex;gap:12px;padding:20px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;justify-content:center;flex-wrap:wrap" class="ad-gallery">
+    <img src="{{ 'ad-sq-01.png' | asset_url }}" alt="X11 Creatine" loading="lazy" style="width:190px;height:190px;object-fit:cover;border-radius:14px;flex-shrink:0">
+    <img src="{{ 'ad-sq-02.png' | asset_url }}" alt="X11 Creatine" loading="lazy" style="width:190px;height:190px;object-fit:cover;border-radius:14px;flex-shrink:0">
+    <img src="{{ 'ad-sq-03.png' | asset_url }}" alt="X11 Creatine" loading="lazy" style="width:190px;height:190px;object-fit:cover;border-radius:14px;flex-shrink:0">
+    <img src="{{ 'ad-sq-04.png' | asset_url }}" alt="X11 Creatine" loading="lazy" style="width:190px;height:190px;object-fit:cover;border-radius:14px;flex-shrink:0">
+    <img src="{{ 'ad-sq-05.png' | asset_url }}" alt="X11 Creatine" loading="lazy" style="width:190px;height:190px;object-fit:cover;border-radius:14px;flex-shrink:0">
+  </div>
+</div>
+
 <!-- PRODUCT REVEAL -->
 <section class="sec sec-alt fi">
   <div class="wrap">
@@ -521,9 +531,9 @@
       <div style="display:flex;justify-content:center">
         <div class="pframe" style="max-width:380px">
           {% if product.featured_image %}
-            {{ product.featured_image | image_url: width: 500 | image_tag: alt: product.title, style: 'width:100%;max-width:240px;margin:0 auto 20px;border-radius:12px;position:relative' }}
+            {{ product.featured_image | image_url: width: 500 | image_tag: alt: product.title, style: 'width:100%;border-radius:12px;margin-bottom:20px;position:relative;z-index:1' }}
           {% else %}
-            <div class="pbottle" style="margin-bottom:20px"><span class="pb-em">🍓</span><span class="pb-name">Creatine Gummies</span><span class="pb-dose">5,000mg</span><span class="pb-sub">per serving</span></div>
+            <img src="{{ 'ad-pt-02.png' | asset_url }}" alt="X11 Creatine Gummies" style="width:100%;border-radius:12px;margin-bottom:20px;position:relative;z-index:1">
           {% endif %}
           <div class="facts-box">
             <div style="font-size:11px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px">Supplement Facts</div>
@@ -671,33 +681,22 @@
 </section>
 
 <!-- VIDEO TESTIMONIALS -->
-<!-- TO ADD YOUR VIDEOS: open each video in Google Drive → click Share → Copy link
-     The link looks like: https://drive.google.com/file/d/XXXXXXXXXXXXXX/view?usp=sharing
-     Copy the ID between /d/ and /view — then replace DRIVE_FILE_ID_1, DRIVE_FILE_ID_2, DRIVE_FILE_ID_3 below -->
 <section class="sec vtsec fi">
   <div class="wrap tc">
     <div class="tag tag-green">Video proof</div>
     <h2 class="h2">Watch them <span class="grad-text">talk about it.</span></h2>
-    <p class="lead" style="max-width:540px;margin:12px auto 0">Unsponsored. Unscripted. Real customers sharing their real results.</p>
+    <p class="lead" style="max-width:540px;margin:12px auto 0">Real customers. Unsponsored. Unscripted. Filmed with their permission.</p>
     <div class="vgrid">
-      <div class="vcard fi d1">
-        <div class="vframe">
-          <iframe src="https://drive.google.com/file/d/DRIVE_FILE_ID_1/preview" allowfullscreen allow="autoplay; encrypted-media" loading="lazy"></iframe>
-        </div>
-        <div class="vcap"><span class="stars" style="font-size:12px">★★★★★</span>&nbsp; "My lifts went up 25lbs — I'm obsessed"</div>
-      </div>
-      <div class="vcard fi d2">
-        <div class="vframe">
-          <iframe src="https://drive.google.com/file/d/DRIVE_FILE_ID_2/preview" allowfullscreen allow="autoplay; encrypted-media" loading="lazy"></iframe>
-        </div>
-        <div class="vcap"><span class="stars" style="font-size:12px">★★★★★</span>&nbsp; "I actually look forward to taking it every day"</div>
-      </div>
-      <div class="vcard fi d3">
-        <div class="vframe">
-          <iframe src="https://drive.google.com/file/d/DRIVE_FILE_ID_3/preview" allowfullscreen allow="autoplay; encrypted-media" loading="lazy"></iframe>
-        </div>
-        <div class="vcap"><span class="stars" style="font-size:12px">★★★★★</span>&nbsp; "Best supplement decision I've ever made"</div>
-      </div>
+      <div class="vcard fi d1"><div class="vwrap"><video playsinline preload="none"><source src="{{ 'vid-01.mp4' | asset_url }}" type="video/mp4"></video><div class="vpov"><button class="vpbtn" aria-label="Play">▶</button></div></div><div class="vcap"><span class="stars" style="font-size:11px">★★★★★</span> "Game changer"</div></div>
+      <div class="vcard fi d2"><div class="vwrap"><video playsinline preload="none"><source src="{{ 'vid-02.mp4' | asset_url }}" type="video/mp4"></video><div class="vpov"><button class="vpbtn" aria-label="Play">▶</button></div></div><div class="vcap"><span class="stars" style="font-size:11px">★★★★★</span> "Obsessed"</div></div>
+      <div class="vcard fi d3"><div class="vwrap"><video playsinline preload="none"><source src="{{ 'vid-03.mp4' | asset_url }}" type="video/mp4"></video><div class="vpov"><button class="vpbtn" aria-label="Play">▶</button></div></div><div class="vcap"><span class="stars" style="font-size:11px">★★★★★</span> "Best purchase"</div></div>
+      <div class="vcard fi d1"><div class="vwrap"><video playsinline preload="none"><source src="{{ 'vid-04.mp4' | asset_url }}" type="video/mp4"></video><div class="vpov"><button class="vpbtn" aria-label="Play">▶</button></div></div><div class="vcap"><span class="stars" style="font-size:11px">★★★★★</span> "Incredible results"</div></div>
+      <div class="vcard fi d2"><div class="vwrap"><video playsinline preload="none"><source src="{{ 'vid-05.mp4' | asset_url }}" type="video/mp4"></video><div class="vpov"><button class="vpbtn" aria-label="Play">▶</button></div></div><div class="vcap"><span class="stars" style="font-size:11px">★★★★★</span> "Love it"</div></div>
+      <div class="vcard fi d3"><div class="vwrap"><video playsinline preload="none"><source src="{{ 'vid-06.mp4' | asset_url }}" type="video/mp4"></video><div class="vpov"><button class="vpbtn" aria-label="Play">▶</button></div></div><div class="vcap"><span class="stars" style="font-size:11px">★★★★★</span> "Actually works"</div></div>
+      <div class="vcard fi d1"><div class="vwrap"><video playsinline preload="none"><source src="{{ 'vid-07.mp4' | asset_url }}" type="video/mp4"></video><div class="vpov"><button class="vpbtn" aria-label="Play">▶</button></div></div><div class="vcap"><span class="stars" style="font-size:11px">★★★★★</span> "Recommend to everyone"</div></div>
+      <div class="vcard fi d2"><div class="vwrap"><video playsinline preload="none"><source src="{{ 'vid-08.mp4' | asset_url }}" type="video/mp4"></video><div class="vpov"><button class="vpbtn" aria-label="Play">▶</button></div></div><div class="vcap"><span class="stars" style="font-size:11px">★★★★★</span> "My new routine"</div></div>
+      <div class="vcard fi d3"><div class="vwrap"><video playsinline preload="none"><source src="{{ 'vid-09.mp4' | asset_url }}" type="video/mp4"></video><div class="vpov"><button class="vpbtn" aria-label="Play">▶</button></div></div><div class="vcap"><span class="stars" style="font-size:11px">★★★★★</span> "Feel the difference"</div></div>
+      <div class="vcard fi d1"><div class="vwrap"><video playsinline preload="none"><source src="{{ 'vid-10.mp4' | asset_url }}" type="video/mp4"></video><div class="vpov"><button class="vpbtn" aria-label="Play">▶</button></div></div><div class="vcap"><span class="stars" style="font-size:11px">★★★★★</span> "Worth every penny"</div></div>
     </div>
   </div>
 </section>
@@ -932,6 +931,17 @@
   // FADE IN
   const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('on');io.unobserve(x.target);}});},{threshold:0.07,rootMargin:'0px 0px -28px 0px'});
   document.querySelectorAll('.fi').forEach(el=>io.observe(el));
+
+  // VIDEO PLAY BUTTONS
+  document.querySelectorAll('.vpbtn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const wrap=btn.closest('.vwrap');
+      const vid=wrap.querySelector('video');
+      wrap.querySelector('.vpov').classList.add('hidden');
+      vid.controls=true;
+      vid.play().catch(()=>{});
+    });
+  });
 
   // AJAX CART
   function fmtMoney(c){return'$'+(c/100).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
