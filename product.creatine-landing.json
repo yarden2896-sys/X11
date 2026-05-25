@@ -1,9 +1,0 @@
-{
-  "sections": {
-    "creatine-landing": {
-      "type": "creatine-landing",
-      "settings": {}
-    }
-  },
-  "order": ["creatine-landing"]
-}
