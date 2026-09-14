@@ -459,7 +459,7 @@
         <div class="pframe">
           {% if product.featured_image %}
             {{ product.featured_image | image_url: width: 600 | image_tag: alt: product.title, loading: 'eager', style: 'width:100%;border-radius:12px;position:relative;z-index:1' }}
-          {% elsif 'product-photo.jpg' | asset_url contains 'cdn.shopify' %}
+          {% elsif 'product-photo.jpg' %}
             <img src="{{ 'product-photo.jpg' | asset_url }}" alt="X11 Creatine Gummies" loading="eager" style="width:100%;border-radius:12px;position:relative;z-index:1">
           {% else %}
             <img src="{{ 'ad-pt-01.png' | asset_url }}" alt="X11 Creatine Gummies" loading="eager" style="width:100%;border-radius:12px;position:relative;z-index:1">
@@ -1027,3 +1027,13 @@
 </script>
 </body>
 </html>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% elsif 'product-photo.jpg' | asset_url contains 'cdn.shopify' %}"
+  to: "{% elsif 'product-photo.jpg' %}"
+  position: 34402..34433
+{% endcomment %}
